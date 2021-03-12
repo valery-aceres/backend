@@ -21,6 +21,10 @@ const UsersSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        phoneNumber: {
+            type: String,
+            required: true
+        },
         dateCreated: {
             type: Date,
             default: Date.now

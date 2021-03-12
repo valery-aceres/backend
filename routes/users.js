@@ -79,5 +79,37 @@ router.post(
                     console.log(error);
                 });
         });
-})         
+})    
+
+
+//User update
+router.post(
+    '/update',
+    (req, res) => {
+
+        UsersModel
+        .findOneAndUpdate(
+            {
+                'email': 'seyi@yahoo.com'
+            },
+            {
+                $set: {
+                    phoneNumber: "0501234567"
+                }
+            }
+        )
+        .then(
+            (dbDocument) => {
+                res.send(dbDocument)
+            }
+        )
+        .catch(
+            (error) => {
+                console.log(dbDocument)
+            }
+        )
+
+    }
+)
+
 module.exports = router;

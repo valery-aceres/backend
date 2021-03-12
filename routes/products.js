@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router()
 const ProductsModel = require("../models/ProductsModel")
 
+// http://localhost:3002/products/
 
+//Product listing
 router.get(
-    '/',
+    '/list',
     (req, res) => {
 
         ProductsModel
@@ -17,17 +19,13 @@ router.get(
         .catch(
             (error) => {
                 console.log(error)
-            }
-        )
+            })
+    });
 
-    }
-);
-
-// 
+// Product Creation
 router.post(
     '/',
     (req, res) => {
-
         // Capture the data in the BODY section
         const formData = {
             brand: req.body.brand,
@@ -38,11 +36,9 @@ router.post(
         }
         // Instantiate an instance of the ProductsModel constructor
         const newProductModel = new ProductsModel(formData)
-
         // Using newProductModel object to save to the database
         newProductModel
         .save()
-
         //  If promise resolves....
         .then(
             (dbDocument) => {
@@ -54,19 +50,10 @@ router.post(
         .catch(
             (error) => {
                 console.log(error)
-            }
-        )
-// newProductModel = {
-//     insert: () => {},
-//     upsert: () => {},
-//     delete: () => {}
-// }
+            })
+    })  
 
-
-    }
-)
-
-
+//Product update
 router.post(
     '/update',
     (req, res) => {
@@ -74,11 +61,11 @@ router.post(
         ProductsModel
         .findOneAndUpdate(
             {
-                'model': 'iPhone 11'
+                'model': 'S10'
             },
             {
                 $set: {
-                    price: 3000
+                    price: 4000
                 }
             }
         )
