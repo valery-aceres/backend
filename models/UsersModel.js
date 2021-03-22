@@ -25,6 +25,12 @@ const UsersSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        dobField: {
+            type: String,
+        },
+        addressField: {
+            type: String,
+        },
         dateCreated: {
             type: Date,
             default: Date.now

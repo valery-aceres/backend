@@ -2,14 +2,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser")
+const cors = require("cors")
 const products = require('./routes/products')
 const users = require('./routes/users')
+
+
+// package that allows express to read the environment variables(like CONNECTION_STRING)
+require('dotenv').config();
 
 // Create a server object 
 const server = express();
 
 // Connect to the database using mongoose
-const connectionString = "mongodb+srv://admin1:Group6-indigoeagles.@cluster0.k45mn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const connectionString = process.env.CONNECTION_STRING;
 const connectionConfig = {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -27,6 +32,7 @@ mongoose
         }
     )
 
+server.use(cors());
 // Tell express how to use body-parser
 server.use( bodyParser.urlencoded({ extended: false }) );
 
