@@ -13,6 +13,9 @@ router.post(
             lastName: req.body.lastName,
             email: req.body.email,
             password: req.body.password,
+            phoneNumber: req.body.phoneNumber,
+            dobField: req.body.dobField,
+            addressField: req.body.addressField,
         };
         // 2. Create newUsersModel for saving the collection 
         const newUsersModel = new UsersModel (formData)
