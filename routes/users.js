@@ -58,7 +58,7 @@ router.post(
     });
 // Create a login route
 router.post(
-    '/login', (req, res) => { // https://www.myapp.com/users/login
+    '/signin', (req, res) => { // https://www.myapp.com/users/signin
         // Capture user accnt details 
         UsersModel
         .find({ email: req.body.email})

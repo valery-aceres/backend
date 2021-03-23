@@ -1,10 +1,11 @@
 // Import 
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require("body-parser")
-const cors = require("cors")
-const products = require('./routes/products')
-const users = require('./routes/users')
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const products = require('./routes/products');
+const users = require('./routes/users');
+
 
 
 // package that allows express to read the environment variables(like CONNECTION_STRING)
