@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcryptjs = require('bcryptjs');
 const UsersModel = require('../models/UsersModel');
+const cloudinary = require('cloudinary').v2;
 
 // create signup/registration route
 router.post(
@@ -23,7 +24,7 @@ router.post(
         UsersModel
         .findOne({ email: formData.email})
         .then(
-            (dbDocument) => {
+            async (dbDocument) => {
                 // if email exists
                 if(dbDocument) {
                     res.send("An account with that email already exists. Please login.");
@@ -31,6 +32,22 @@ router.post(
                     // then reject registration 
                 // if email does not exist
                 else {
+                    // 4a) Upload their picture if file(s) were sent
+                    if( Object.values(req.files).length > 0 ) {
+                        const files = Object.values(req.files);
+
+                        // Image
+                        await cloudinary.uploader.upload(
+                            files[0].path,
+                            (cloudinaryErr, cloudinaryResult) => {
+                                if(cloudinaryErr) {
+                                    console.log(cloudinaryErr)
+                                }
+                                // Add the URL of the picture to newUsersModel
+                                newUsersModel.avatar = cloudinaryResult.url;
+                            }
+                        )
+                    }
                     // 4. Generate a salt 
                     bcryptjs.genSalt(
                         (err, theSalt) => {

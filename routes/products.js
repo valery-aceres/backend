@@ -28,11 +28,23 @@ router.post(
     (req, res) => {
         // Capture the data in the BODY section
         const formData = {
+            _id: req.body._id,
+            title: req.body.title,
+            // src: req.body.src,
+            // src2: req.body.src2,
+            // src3: req.body.src3,
+            os: req.body.os,
+            ram: req.body.ram,
             brand: req.body.brand,
+            dimension: req.body.dimension,
+            box: req.body.box,
+            weight: req.body.weight,
             model: req.body.model,
+            description: req.body.description,
+            discount: req.body.discount,
             price: req.body.price,
-            warranty: req.body.warranty,
-            origin: req.body.origin
+            colors: req.body.colors,
+            count: req.body.count
         }
         // Instantiate an instance of the ProductsModel constructor
         const newProductModel = new ProductsModel(formData)
